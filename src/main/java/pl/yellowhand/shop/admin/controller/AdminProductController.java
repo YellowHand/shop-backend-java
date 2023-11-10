@@ -61,15 +61,17 @@ public class AdminProductController {
 
     @PostMapping("/admin/products/upload-image")
     public UploadResponse uploadImage(@RequestParam("file") MultipartFile multipartFile){
-        String fileName = multipartFile.getOriginalFilename();
+        String filename = multipartFile.getOriginalFilename();
         String uploadDir = "./data/productImages/";
 
-        Path filePath = Paths.get(uploadDir).resolve(fileName);
+
+        Path filePath = Paths.get(uploadDir).resolve(filename);
 
         try (InputStream inputStream = multipartFile.getInputStream()) {
             OutputStream outputStream = Files.newOutputStream(filePath);
             inputStream.transferTo(outputStream);
-            return new UploadResponse(fileName);
+            log.info("Zapis obrazka");
+            return new UploadResponse(filename);
         } catch (IOException e) {
             throw new RuntimeException("Nie moge zapisać pliku", e);
         }
