@@ -19,9 +19,10 @@ public class AdminProductImageService {
     private String uploadDir;
 
     public String uploadImage(String filename, InputStream inputStream) {
-        String newFileName = filename;
-        Path filePath = Paths.get(uploadDir).resolve(filename);
+        String newFileName = UploadedFilesNameUtils.slugifyFileName(filename);
 
+
+        Path filePath = Paths.get(uploadDir).resolve(newFileName);
         try (OutputStream outputStream = Files.newOutputStream(filePath);){
             inputStream.transferTo(outputStream);
         } catch (IOException e) {
