@@ -73,7 +73,7 @@ public class AdminProductController {
             log.info("Zapis obrazka");
             return new UploadResponse(filename);
         } catch (IOException e) {
-            throw new RuntimeException("Nie moge zapisać pliku", e);
+            throw new RuntimeException("Nie moge zapisać pliku ", e);
         }
     }
 
