@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 @Service
 public class AdminProductImageService {
 
-    @Value("${app.uploadDir}")
+    @Value(value = "${app.uploadDir}")
     private String uploadDir;
 
     public String uploadImage(String filename, InputStream inputStream) {
