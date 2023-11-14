@@ -8,7 +8,6 @@ import java.nio.file.Path;
 
 class ExistingFileRenameUtils {
 
-    private static int count = 0;
 
     public static String renameIfExists(Path uploadDir, String fileName) {
         if (Files.exists(uploadDir.resolve(fileName))) {
