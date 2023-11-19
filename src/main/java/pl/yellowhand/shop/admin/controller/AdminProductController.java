@@ -1,5 +1,6 @@
 package pl.yellowhand.shop.admin.controller;
 
+import com.github.slugify.Slugify;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -77,6 +78,22 @@ public class AdminProductController {
     }
 
     private static AdminProduct mapAdminProduct(AdminProductDto adminProductDto, Long id) {
-        return AdminProduct.builder().id(id).name(adminProductDto.getName()).description(adminProductDto.getDescription()).category(adminProductDto.getCategory()).price(adminProductDto.getPrice()).currency(adminProductDto.getCurrency()).image(adminProductDto.getImage()).build();
+        return AdminProduct.builder()
+                .id(id)
+                .name(adminProductDto.getName())
+                .description(adminProductDto.getDescription())
+                .category(adminProductDto.getCategory())
+                .price(adminProductDto.getPrice())
+                .currency(adminProductDto.getCurrency())
+                .image(adminProductDto.getImage())
+                .slug(slugifySlug(adminProductDto.getSlug()))
+                .build();
+    }
+
+    private static String slugifySlug(String slug) {
+        return Slugify.builder()
+                .customReplacement("_", "-")
+                .build()
+                .slugify(slug);
     }
 }
